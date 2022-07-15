@@ -50,7 +50,8 @@ export class SourceTrackingService {
     const project = await SfProject.resolve(projectPath);
     const options: SourceTrackingOptions = {
       org,
-      project
+      project,
+      ignoreLocalCache: true
     };
 
     // Change the environment to get the node process to use
