@@ -45,12 +45,13 @@ export class SourceTrackingService {
 
   private async createSourceTracking(): Promise<SourceTracking> {
     const projectPath = getRootWorkspacePath();
-    const username = await OrgAuthInfo.getDefaultUsernameOrAlias(false);
-    const org: Org = await Org.create({ aliasOrUsername: username });
+    const aliasOrUsername = await OrgAuthInfo.getDefaultUsernameOrAlias(false);
+    const org: Org = await Org.create({ aliasOrUsername });
     const project = await SfProject.resolve(projectPath);
     const options: SourceTrackingOptions = {
       org,
-      project
+      project,
+      ignoreLocalCache: true
     };
 
     // Change the environment to get the node process to use
